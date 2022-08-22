@@ -20,5 +20,11 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
+    public Mono<Team> findTeamById(String id){
+        return teamRepository.findById(id);
+    }
 
+    public Mono<Void> deleteTeam(String id){
+        return teamRepository.deleteById(id);
+    }
 }

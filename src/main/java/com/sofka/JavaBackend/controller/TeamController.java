@@ -33,4 +33,27 @@ public class TeamController {
     public Flux<Team> getAll() {
         return teamService.getAllTeams();
     }
+    @GetMapping(value = "/{id}")
+    public Mono<Team> getTeamById(@PathVariable String id){
+        return teamService.findTeamById(id)
+//                .onErrorResume(err -> {
+//                    logger.info(err.getMessage());
+//                    return Mono.empty();
+//                })
+                ;
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public Mono<Void> deleteTeam(@PathVariable String id){
+        return teamService.deleteTeam(id);
+    }
+
+    @PutMapping(value = "/{id}")
+    public Mono<Team> updateTeam(@PathVariable String id, @RequestBody Team newTeam){
+        Team team=teamService.findTeamById(id).toFuture().join();
+        team.setName(newTeam.getName());
+        team.setTeam_code(newTeam.getTeam_code());
+        team.setCountry(newTeam.getCountry());
+        return teamService.createTeam(team);
+    }
 }
