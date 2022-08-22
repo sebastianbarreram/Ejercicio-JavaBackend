@@ -2,20 +2,20 @@ package com.sofka.JavaBackend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "team")
-public class Team {
+public class Cyclist {
     @Id
     private String id;
     private String name;
     @Indexed(unique = true)
-    private String team_code;
+    private String clyclist_number;
+    private String team;
     private String country;
 
-    public Team(String name, String team_code, String country) {
+    public Cyclist(String name, String clyclist_number, String team, String country) {
         this.name = name;
-        this.team_code = team_code;
+        this.clyclist_number = clyclist_number;
+        this.team = team;
         this.country = country;
     }
 
@@ -35,12 +35,20 @@ public class Team {
         this.name = name;
     }
 
-    public String getTeam_code() {
-        return team_code;
+    public String getClyclist_number() {
+        return clyclist_number;
     }
 
-    public void setTeam_code(String team_code) {
-        this.team_code = team_code;
+    public void setClyclist_number(String clyclist_number) {
+        this.clyclist_number = clyclist_number;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 
     public String getCountry() {
