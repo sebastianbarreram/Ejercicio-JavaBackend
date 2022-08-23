@@ -22,7 +22,7 @@ public class TeamController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public Mono<Team> add(@RequestBody Team team) {
 //        logger.info("Va entrando al metodo");
-        return teamService.createTeam(team)
+        return this.teamService.createTeam(team)
                 .onErrorResume(err -> {
                     logger.info(err.getMessage());
                     return Mono.empty();
@@ -31,29 +31,25 @@ public class TeamController {
 
     @GetMapping
     public Flux<Team> getAll() {
-        return teamService.getAllTeams();
+        return this.teamService.getAllTeams();
     }
+
     @GetMapping(value = "/{id}")
-    public Mono<Team> getTeamById(@PathVariable String id){
-        return teamService.findTeamById(id)
-//                .onErrorResume(err -> {
-//                    logger.info(err.getMessage());
-//                    return Mono.empty();
-//                })
-                ;
+    public Mono<Team> getTeamById(@PathVariable String id) {
+        return this.teamService.findTeamById(id);
     }
 
     @DeleteMapping(value = "/{id}")
-    public Mono<Void> deleteTeam(@PathVariable String id){
-        return teamService.deleteTeam(id);
+    public Mono<Void> deleteTeam(@PathVariable String id) {
+        return this.teamService.deleteTeam(id);
     }
 
     @PutMapping(value = "/{id}")
-    public Mono<Team> updateTeam(@PathVariable String id, @RequestBody Team newTeam){
-        Team team=teamService.findTeamById(id).toFuture().join();
+    public Mono<Team> updateTeam(@PathVariable String id, @RequestBody Team newTeam) {
+        Team team = this.teamService.findTeamById(id).toFuture().join();
         team.setName(newTeam.getName());
         team.setTeam_code(newTeam.getTeam_code());
         team.setCountry(newTeam.getCountry());
-        return teamService.createTeam(team);
+        return this.teamService.createTeam(team);
     }
 }

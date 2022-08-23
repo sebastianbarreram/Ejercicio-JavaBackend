@@ -10,21 +10,21 @@ import reactor.core.publisher.Mono;
 @Service
 public class TeamService {
     @Autowired
-    TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
-    public Mono<Team> createTeam(Team team){
-        return teamRepository.save(team);
+    public Mono<Team> createTeam(Team team) {
+        return this.teamRepository.save(team);
     }
 
-    public Flux<Team> getAllTeams(){
-        return teamRepository.findAll();
+    public Flux<Team> getAllTeams() {
+        return this.teamRepository.findAll();
     }
 
-    public Mono<Team> findTeamById(String id){
-        return teamRepository.findById(id);
+    public Mono<Team> findTeamById(String id) {
+        return this.teamRepository.findById(id);
     }
 
-    public Mono<Void> deleteTeam(String id){
-        return teamRepository.deleteById(id);
+    public Mono<Void> deleteTeam(String id) {
+        return this.teamRepository.deleteById(id);
     }
 }
