@@ -4,19 +4,23 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "team")
 public class Team {
     @Id
     private String id;
     private String name;
     @Indexed(unique = true)
-    private String team_code;
+    private String teamCode;
     private String country;
+    private List<Cyclist> listCyclists;
 
-    public Team(String name, String team_code, String country) {
+    public Team(String name, String teamCode, String country, List<Cyclist> listCyclists) {
         this.name = name;
-        this.team_code = team_code;
+        this.teamCode = teamCode;
         this.country = country;
+        this.listCyclists = listCyclists;
     }
 
     public String getId() {
@@ -35,12 +39,12 @@ public class Team {
         this.name = name;
     }
 
-    public String getTeam_code() {
-        return team_code;
+    public String getTeamCode() {
+        return teamCode;
     }
 
-    public void setTeam_code(String team_code) {
-        this.team_code = team_code;
+    public void setTeamCode(String team_code) {
+        this.teamCode = team_code;
     }
 
     public String getCountry() {
@@ -49,5 +53,13 @@ public class Team {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Cyclist> getListCyclists() {
+        return listCyclists;
+    }
+
+    public void setListCyclists(List<Cyclist> listCyclists) {
+        this.listCyclists = listCyclists;
     }
 }

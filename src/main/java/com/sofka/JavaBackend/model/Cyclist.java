@@ -2,21 +2,23 @@ package com.sofka.JavaBackend.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "cyclist")
 public class Cyclist {
     @Id
     private String id;
     private String name;
     @Indexed(unique = true)
-    private String clyclist_number;
+    private String cyclistNumber;
     private String team;
-    private String country;
+    private String nationality;
 
-    public Cyclist(String name, String clyclist_number, String team, String country) {
+    public Cyclist(String name, String cyclistNumber, String team, String nationality) {
         this.name = name;
-        this.clyclist_number = clyclist_number;
+        this.cyclistNumber = cyclistNumber;
         this.team = team;
-        this.country = country;
+        this.nationality = nationality;
     }
 
     public String getId() {
@@ -35,12 +37,12 @@ public class Cyclist {
         this.name = name;
     }
 
-    public String getClyclist_number() {
-        return clyclist_number;
+    public String getClyclistNumber() {
+        return cyclistNumber;
     }
 
-    public void setClyclist_number(String clyclist_number) {
-        this.clyclist_number = clyclist_number;
+    public void setClyclistNumber(String cyclistNumber) {
+        this.cyclistNumber = cyclistNumber;
     }
 
     public String getTeam() {
@@ -51,11 +53,11 @@ public class Cyclist {
         this.team = team;
     }
 
-    public String getCountry() {
-        return country;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }

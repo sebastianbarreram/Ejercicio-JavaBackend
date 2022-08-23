@@ -1,5 +1,6 @@
 package com.sofka.JavaBackend.controller;
 
+import com.sofka.JavaBackend.model.Cyclist;
 import com.sofka.JavaBackend.model.Team;
 import com.sofka.JavaBackend.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +60,19 @@ public class TeamController {
     public Mono<Team> updateTeam(@PathVariable String id, @RequestBody Team newTeam) {
         Team team = this.teamService.findTeamById(id).toFuture().join();
         team.setName(newTeam.getName());
-        team.setTeam_code(newTeam.getTeam_code());
+        team.setTeamCode(newTeam.getTeamCode());
         team.setCountry(newTeam.getCountry());
+        team.setListCyclists(newTeam.getListCyclists());
         return this.teamService.createTeam(team);
     }
 
-    @GetMapping(value = "/ByCountry/{country}")
+    @GetMapping(value = "/byCountry/{country}")
     public Flux<Team> getTeamByCountry(@PathVariable String country){
         return this.teamService.findTeamByCountry(country);
+    }
+
+    @GetMapping(value = "/cyclists/{id}")
+    public Flux<Cyclist> getCyclistLits(@PathVariable String id){
+        return Flux.fromIterable(this.teamService.findTeamById(id).toFuture().join().getListCyclists());
     }
 }

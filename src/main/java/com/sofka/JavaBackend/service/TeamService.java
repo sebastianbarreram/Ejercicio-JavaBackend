@@ -13,7 +13,7 @@ public class TeamService {
     private TeamRepository teamRepository;
 
     public Mono<Team> createTeam(Team team) {
-
+//TODO: verificar que sean máximo 3 caracteres
         return this.teamRepository.save(team);
     }
 
@@ -32,4 +32,7 @@ public class TeamService {
     public Flux<Team> findTeamByCountry(String country) {
         return this.teamRepository.findAllByCountry(country);
     }
+
+    //TODO:Agregar ciclista al equipo
+    //TODO: Un equipo de ciclismo estará conformado por un máximo de 8 corredores.
 }
