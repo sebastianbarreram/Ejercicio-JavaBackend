@@ -13,6 +13,7 @@ public class TeamService {
     private TeamRepository teamRepository;
 
     public Mono<Team> createTeam(Team team) {
+
         return this.teamRepository.save(team);
     }
 
@@ -26,5 +27,9 @@ public class TeamService {
 
     public Mono<Void> deleteTeam(String id) {
         return this.teamRepository.deleteById(id);
+    }
+
+    public Flux<Team> findTeamByCountry(String country) {
+        return this.teamRepository.findAllByCountry(country);
     }
 }
