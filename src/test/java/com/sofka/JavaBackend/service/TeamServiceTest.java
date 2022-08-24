@@ -26,7 +26,7 @@ class TeamServiceTest {
     TeamService teamService;
 
     @Test
-    void createTeam() {
+    void createTeam() throws IllegalAccessException {
         List<Cyclist> list =List.of(new Cyclist());
         Team team = new Team("1", "Tapitas", "123", "Colombia",list);
 

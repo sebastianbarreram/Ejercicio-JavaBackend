@@ -12,9 +12,11 @@ public class TeamService {
     @Autowired
     TeamRepository teamRepository;
 
-    public Mono<Team> createTeam(Team team) {
-//TODO: verificar que sean máximo 3 caracteres
-        return this.teamRepository.save(team);
+    public Mono<Team> createTeam(Team team) throws IllegalAccessException {
+        if (team.getTeamCode().length() <= 3) {
+            return this.teamRepository.save(team);
+        }
+         throw new IllegalAccessException("El código del equipo debe tener máximo 3 caracteres");
     }
 
     public Flux<Team> getAllTeams() {
