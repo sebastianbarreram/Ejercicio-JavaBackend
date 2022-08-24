@@ -49,7 +49,7 @@ public class CyclistController {
     public Mono<Cyclist> updateCyclist(@PathVariable String id, @RequestBody Cyclist newCyclist) {
         Cyclist cyclist = this.cyclistService.findCyclistById(id).toFuture().join();
         cyclist.setName(newCyclist.getName());
-        cyclist.setClyclistNumber(newCyclist.getClyclistNumber());
+        cyclist.setCyclistNumber(newCyclist.getCyclistNumber());
         cyclist.setTeam(newCyclist.getTeam());
         cyclist.setNationality(newCyclist.getNationality());
         return this.cyclistService.createCyclist(cyclist);
