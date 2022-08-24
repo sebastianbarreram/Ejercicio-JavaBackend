@@ -1,5 +1,5 @@
 # Ejercicio-JavaBackend
-Aplicación Backend en donde se implementa una arquitectura por capas y se usa lenguaje Java mediante el framework Spring Boot. Se implementa Maven como sistema para la gestión y construcción de la aplicación, y se crea una base de datos NoSQL con MongoDB. 
+Aplicación Backend en donde se implementa una arquitectura por capas y se usa lenguaje Java mediante el framework Spring Boot. Se implementa Maven como sistema para la gestión y construcción de la aplicación, y se crea una base de datos NoSQL con MongoDB de manera local. 
 
 ## Enunciado
 Uno de los eventos más importantes del ciclismo a nivel mundial es el Tour de Francia. Como parte del equipo de tecnología que apoya a la competición, se te ha encargado la tarea de desarrollar una aplicación o servicio que permita el registro de los equipos y sus respectivos ciclistas.
