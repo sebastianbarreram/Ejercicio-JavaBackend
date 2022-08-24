@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class TeamService {
     @Autowired
-    private TeamRepository teamRepository;
+    TeamRepository teamRepository;
 
     public Mono<Team> createTeam(Team team) {
 //TODO: verificar que sean máximo 3 caracteres
