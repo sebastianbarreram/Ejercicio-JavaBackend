@@ -20,4 +20,4 @@ Adicional a las consultas propias de una entidad (CRUD), se recomienda practicar
 
 Mediante el uso de Postman se realizaron las siguientes peticiones:
 
-"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+https://schema.getpostman.com/json/collection/v2.1.0/collection.json
