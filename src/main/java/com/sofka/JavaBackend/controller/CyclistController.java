@@ -50,13 +50,18 @@ public class CyclistController {
         Cyclist cyclist = this.cyclistService.findCyclistById(id).toFuture().join();
         cyclist.setName(newCyclist.getName());
         cyclist.setCyclistNumber(newCyclist.getCyclistNumber());
-        cyclist.setTeam(newCyclist.getTeam());
+        cyclist.setTeamCode(newCyclist.getTeamCode());
         cyclist.setNationality(newCyclist.getNationality());
         return this.cyclistService.createCyclist(cyclist);
     }
 
     @GetMapping(value = "/byNationality/{nationality}")
-    public Flux<Cyclist> getTeamByCountry(@PathVariable String nationality){
+    public Flux<Cyclist> getCyclistByNationality(@PathVariable String nationality){
         return this.cyclistService.findCyclistByNationality(nationality);
+    }
+
+    @GetMapping(value = "/byTeamCode/{teamCode}")
+    public Flux<Cyclist> getCyclistByTeamCode(@PathVariable String teamCode){
+        return this.cyclistService.findCyclistByTeamCode(teamCode);
     }
 }

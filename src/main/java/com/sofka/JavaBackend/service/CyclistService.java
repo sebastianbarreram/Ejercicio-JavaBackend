@@ -32,4 +32,8 @@ public class CyclistService {
     public Flux<Cyclist> findCyclistByNationality(String nationality) {
         return this.cyclistRepository.findAllByNationality(nationality);
     }
+
+    public Flux<Cyclist> findCyclistByTeamCode(String teamCode) {
+        return this.cyclistRepository.findAllByTeamCode(teamCode);
+    }
 }

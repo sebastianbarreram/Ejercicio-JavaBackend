@@ -6,4 +6,6 @@ import reactor.core.publisher.Flux;
 
 public interface CyclistRepository extends ReactiveMongoRepository<Cyclist,String> {
     Flux<Cyclist> findAllByNationality(String nationality);
+
+    Flux<Cyclist> findAllByTeamCode(String teamCode);
 }

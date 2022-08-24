@@ -17,6 +17,6 @@ public class Cyclist {
     private String name;
     @Indexed(unique = true)
     private String cyclistNumber;
-    private String team;
+    private String teamCode;
     private String nationality;
 }
