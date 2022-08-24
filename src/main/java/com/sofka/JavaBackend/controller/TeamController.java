@@ -1,6 +1,5 @@
 package com.sofka.JavaBackend.controller;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.sofka.JavaBackend.model.Cyclist;
 import com.sofka.JavaBackend.model.Team;
 import com.sofka.JavaBackend.service.TeamService;
@@ -56,7 +55,7 @@ public class TeamController {
             team.setTeamCode(newTeam.getTeamCode());
             team.setCountry(newTeam.getCountry());
             team.setListCyclists(newTeam.getListCyclists());
-            return  ResponseEntity.ok(this.teamService.createTeam(team).toFuture().join());
+            return ResponseEntity.ok(this.teamService.createTeam(team).toFuture().join());
         } catch (Exception e) {
             Team message = new Team();
             message.setId(e.getMessage());
@@ -74,12 +73,18 @@ public class TeamController {
         return Flux.fromIterable(this.teamService.findTeamById(id).toFuture().join().getListCyclists());
     }
 
-    @PutMapping(value = "/addCyclist/{team}")
-    public Mono<Team> addCyclistToTeam(@RequestParam(name = "team") String teamCode) {
+    @PutMapping(value = "/addCyclist")
+    public ResponseEntity<Team> addCyclistToTeam(@RequestParam(name = "id") String id, @RequestBody Cyclist cyclist) {
         try {
-            return null;
+            Team team = this.teamService.findTeamById(id).toFuture().join();
+            List<Cyclist> list = team.getListCyclists();
+            list.add(cyclist);
+            team.setListCyclists(list);
+            return ResponseEntity.ok(this.teamService.createTeam(team).toFuture().join());
         } catch (Exception e) {
-            return null;
+            Team message = new Team();
+            message.setId(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
         }
     }
 

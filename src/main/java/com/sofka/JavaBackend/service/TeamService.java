@@ -13,8 +13,11 @@ public class TeamService {
     TeamRepository teamRepository;
 
     public Mono<Team> createTeam(Team team) throws IllegalAccessException {
-        if (team.getTeamCode().length() <= 3) {
+        if (team.getTeamCode().length() <= 3 && team.getListCyclists().size()<=8) {
             return this.teamRepository.save(team);
+        }
+        if (team.getListCyclists().size()>8){
+            throw new IllegalAccessException("El equipo ya ha alcanzado el número máximo de integrantes");
         }
          throw new IllegalAccessException("El código del equipo debe tener máximo 3 caracteres");
     }
@@ -34,7 +37,4 @@ public class TeamService {
     public Flux<Team> findTeamByCountry(String country) {
         return this.teamRepository.findAllByCountry(country);
     }
-
-    //TODO:Agregar ciclista al equipo
-    //TODO: Un equipo de ciclismo estará conformado por un máximo de 8 corredores.
 }

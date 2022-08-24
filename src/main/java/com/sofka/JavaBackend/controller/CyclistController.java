@@ -26,7 +26,9 @@ public class CyclistController {
             return ResponseEntity.ok(this.cyclistService.createCyclist(cyclist).toFuture().join());
         } catch (Exception e) {
             logger.info(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            Cyclist message = new Cyclist();
+            message.setId(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
         }
     }
 
@@ -46,13 +48,19 @@ public class CyclistController {
     }
 
     @PutMapping(value = "/{id}")
-    public Mono<Cyclist> updateCyclist(@PathVariable String id, @RequestBody Cyclist newCyclist) {
-        Cyclist cyclist = this.cyclistService.findCyclistById(id).toFuture().join();
-        cyclist.setName(newCyclist.getName());
-        cyclist.setCyclistNumber(newCyclist.getCyclistNumber());
-        cyclist.setTeamCode(newCyclist.getTeamCode());
-        cyclist.setNationality(newCyclist.getNationality());
-        return this.cyclistService.createCyclist(cyclist);
+    public ResponseEntity<Cyclist> updateCyclist(@PathVariable String id, @RequestBody Cyclist newCyclist) {
+        try {
+            Cyclist cyclist = this.cyclistService.findCyclistById(id).toFuture().join();
+            cyclist.setName(newCyclist.getName());
+            cyclist.setCyclistNumber(newCyclist.getCyclistNumber());
+            cyclist.setTeamCode(newCyclist.getTeamCode());
+            cyclist.setNationality(newCyclist.getNationality());
+            return ResponseEntity.ok(this.cyclistService.createCyclist(cyclist).toFuture().join());
+        }catch (Exception e){
+            Cyclist message = new Cyclist();
+            message.setId(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+        }
     }
 
     @GetMapping(value = "/byNationality/{nationality}")

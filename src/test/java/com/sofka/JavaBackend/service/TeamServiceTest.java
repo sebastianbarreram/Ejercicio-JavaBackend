@@ -30,7 +30,7 @@ class TeamServiceTest {
         List<Cyclist> list =List.of(new Cyclist());
         Team team = new Team("1", "Tapitas", "123", "Colombia",list);
 
-        when(teamRepository.save(Mockito.any(Team.class))).thenReturn(Mono.just(team));
+        when(teamRepository.save(Mockito.any())).thenReturn(Mono.just(team));
 
         StepVerifier.create(teamService.createTeam(team))
                 .expectNext(team)
@@ -41,6 +41,7 @@ class TeamServiceTest {
 
     @Test
     void getAllTeams() {
+
     }
 
     @Test

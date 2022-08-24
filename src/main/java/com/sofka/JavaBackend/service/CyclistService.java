@@ -12,9 +12,12 @@ public class CyclistService {
     @Autowired
     private CyclistRepository cyclistRepository;
 
-    public Mono<Cyclist> createCyclist(Cyclist cyclist) {
-        //TODO: verificar que sean máximo 3 dígitos
-        return this.cyclistRepository.save(cyclist);
+    public Mono<Cyclist> createCyclist(Cyclist cyclist) throws IllegalAccessException {
+        if (cyclist.getCyclistNumber().length()<=3){
+            return this.cyclistRepository.save(cyclist);
+        }
+        throw new IllegalAccessException("El número de competidor debe tener máximo 3 caracteres");
+
     }
 
     public Flux<Cyclist> getAllCyclists() {
